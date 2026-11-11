@@ -1,0 +1,81 @@
+{
+  "scoring_weights": {
+    "technical_significance": 0.20,
+    "audience_relevance": 0.20,
+    "novelty_and_originality": 0.15,
+    "industry_impact": 0.15,
+    "technical_depth": 0.15,
+    "source_credibility": 0.10,
+    "timeliness": 0.05
+  },
+  "weights": {
+    "significance": 0.30,
+    "recency": 0.20,
+    "coverage": 0.15,
+    "engagement": 0.15,
+    "technical_depth": 0.10,
+    "source_credibility": 0.10
+  },
+  "minimum_quality_score": 48,
+  "promotional_threshold": 50,
+  "promotional_warning_threshold": 30,
+  "target_breaking_ratio": 0.55,
+  "target_technical_ratio": 0.45,
+  "breaking_weights": {
+    "significance": 0.30,
+    "recency": 0.20,
+    "coverage": 0.20,
+    "source_credibility": 0.15,
+    "technical_depth": 0.10,
+    "engagement": 0.05
+  },
+  "technical_weights": {
+    "technical_depth": 0.30,
+    "significance": 0.25,
+    "source_credibility": 0.20,
+    "originality": 0.15,
+    "recency": 0.10
+  },
+  "max_articles_per_source": 2,
+  "lookback_hours": 36,
+  "source_credibility_overrides": {},
+  "category_priority": {},
+  "blacklisted_domains": [],
+  "blacklisted_sources": [],
+  "boosted_domains": {},
+  "exclude_title_patterns": [
+    "\\b(opinion|op-ed|editorial)\\b",
+    "\\b(award|awards|ceremony|honored|honoured)\\b",
+    "\\b(partners? with|partnership|teams up with)\\b.*\\b(to deliver|to provide|to expand|strategic)\\b",
+    "\\b(inks? deal|contract award|wins? contract|million contract)\\b",
+    "\\b(sponsors?|sponsorship|proud to announce|joins? forces)\\b",
+    "\\b(top \\d+|best \\d+|roundup|buying guide)\\b",
+    "\\b(interviews?|career advice|job search|resume tips|salary negotiation)\\b",
+    "\\b\\d+\\s+(?:core components|components|things|ways|reasons|steps|tools|tips|lessons|facts|features|rules|trends)\\b",
+    "\\b(weird licenses?|the case for|long story short|wikipedia article)\\b"
+  ],
+  "exclude_body_patterns": [
+    "\\bpress release\\b.*\\b(partnership|sponsorship|award)\\b",
+    "\\b(brought to you by|sponsored by|partner content|presented by)\\b",
+    "\\b(system design interview|interview questions|interview deep dive|career advice|job search)\\b"
+  ],
+  "high_value_patterns": [
+    "zero.day", "actively exploited", "critical vulnerability", "proof.of.concept exploit",
+    "open.source model", "frontier model", "benchmark", "production deployment",
+    "performance improvement", "throughput", "latency", "agentic",
+    "new capability", "breakthrough", "technical deep dive", "postmortem", "incident report"
+  ],
+  "github_project_signal_pattern": "\\b(ai|llm|model|inference|robot|tactile|sensor|database|security|compiler|framework|benchmark|accelerator|kubernetes|vector|quantum|protocol|agent|gpu|neural|transformer|distributed|analytics|cloud|developer|automation|vision|search|cryptograph\\w*|performance|architecture)\\b",
+  "technical_patterns": [
+    "architecture", "benchmark", "latency", "throughput", "training data", "inference",
+    "kernel", "compiler", "database engine", "distributed system", "protocol", "cve-\\d{4}-\\d+",
+    "exploit", "vulnerability", "source code", "open source", "api", "model weights",
+    "gpu", "tensor", "quantization", "postgres", "kubernetes", "production"
+  ],
+  "manual_feedback": {
+    "promoted_urls": [],
+    "rejected_urls": [],
+    "positive_domains": {},
+    "negative_domains": {}
+  }
+}

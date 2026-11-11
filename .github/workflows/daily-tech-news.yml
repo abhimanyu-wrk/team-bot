@@ -1,0 +1,57 @@
+name: Daily Technology News Digest
+
+on:
+  schedule:
+    - cron: '30 5 * * *'
+  workflow_dispatch:
+    inputs:
+      diagnostic_only:
+        description: "Collect and inspect candidates without sending a Teams message"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-tech-news
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/cache@v4
+        with:
+          path: .state
+          key: news-state-${{ github.run_id }}
+          restore-keys: news-state-
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Run intelligence briefing
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          MAX_ARTICLES: '5'
+          CANDIDATE_LIMIT: '20'
+          TIMEZONE: Asia/Kolkata
+          NEWS_LOOKBACK_HOURS: '36'
+          STATE_PATH: .state/sent.json
+          HISTORY_PATH: .state/editorial-history.json
+          TREND_PATH: .state/trend-metrics.json
+          DIAGNOSTIC_ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.diagnostic_only || 'false' }}
+        run: python main.py
+      - name: Upload candidate and rejection reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tech-intelligence-report-${{ github.run_id }}
+          path: .reports/
+          if-no-files-found: warn
+          retention-days: 30
